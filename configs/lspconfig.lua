@@ -32,3 +32,16 @@ lspconfig.gopls.setup {
     },
   },
 }
+
+lspconfig.phpactor.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  -- cmd = { "phpactor" },
+  init_options = {
+    ["language_server_psalm.enabled"] = false,
+    ["language_server_phpstan.enabled"] = true,
+    ["language_server_php_cs_fixer.enabled"] = true,
+    ["symfony.enabled"] = true,
+    ["phpunit.enabled"] = true,
+  },
+}

@@ -144,6 +144,19 @@ M.gopher = {
   },
 }
 
+M.phpactor = {
+  plugin = true,
+  n = {
+    ["<leader>pcc"] = {
+      '<cmd> call phpactor#rpc("class_new", { "current_path": phpactor#_path(), "variant": "default"}) <CR>',
+      "PHP Create class",
+    },
+    ["<leader>pci"] = {
+      '<cmd> call phpactor#rpc("class_new", { "current_path": phpactor#_path(), "variant": "interface"}) <CR>',
+      "PHP Create interface",
+    },
+  },
+}
 -- more keybinds!
 
 return M

@@ -160,6 +160,14 @@ local plugins = {
   --   ft = { "go", "gomod" },
   --   build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
   -- },
+  {
+    "phpactor/phpactor",
+    ft = "php",
+    config = function()
+      -- require("phpactor").setup(opts)
+      require("core.utils").load_mappings "phpactor"
+    end,
+  },
 }
 
 return plugins
