@@ -168,6 +168,24 @@ local plugins = {
       require("core.utils").load_mappings "phpactor"
     end,
   },
+
+  {
+    "nvim-neotest/neotest",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      "olimorris/neotest-phpunit",
+    },
+    config = function()
+      require("neotest").setup {
+        adapters = {
+          require "neotest-phpunit" {
+            filter_dirs = { ".git", "node_modules", "vendro" },
+          },
+        },
+      }
+    end,
+  },
 }
 
 return plugins

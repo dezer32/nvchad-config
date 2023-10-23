@@ -54,6 +54,24 @@ M.tabufline = {
   },
 }
 
+M.nvterm = {
+  plugin = true,
+  n = {
+    ["<f7>"] = {
+      function()
+        require("nvterm.terminal").toggle "float"
+      end,
+    },
+  },
+  t = {
+    ["<f7>"] = {
+      function()
+        require("nvterm.terminal").toggle "float"
+      end,
+    },
+  },
+}
+
 M.goimpl = {
   -- plugin = true,
   n = {

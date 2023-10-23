@@ -41,7 +41,10 @@ M.mason = {
     -- "clang-format",
 
     "phpactor",
-    "phpcsfixer",
+    -- "phpcsfixer",
+    "php_cs_fixer",
+    "phpstan",
+    "php_debug_adapter",
     "gopls",
   },
 }
