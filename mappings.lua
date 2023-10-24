@@ -165,16 +165,53 @@ M.gopher = {
 M.phpactor = {
   plugin = true,
   n = {
+    -- ["<leader>pcc"] = {
+    --   '<cmd> call phpactor#rpc("class_new", { "current_path": phpactor#_path(), "variant": "default"}) <CR>',
+    --   "PHP Create class",
+    -- },
     ["<leader>pcc"] = {
-      '<cmd> call phpactor#rpc("class_new", { "current_path": phpactor#_path(), "variant": "default"}) <CR>',
+      function()
+        local node = require("nvim-tree.api").tree.get_node_under_cursor()
+        vim.fn["phpactor#rpc"](
+          "class_new",
+          { ["current_path"] = "" .. node.absolute_path .. "", ["variant"] = "default" }
+        )
+      end,
       "PHP Create class",
     },
     ["<leader>pci"] = {
-      '<cmd> call phpactor#rpc("class_new", { "current_path": phpactor#_path(), "variant": "interface"}) <CR>',
+      function()
+        local node = require("nvim-tree.api").tree.get_node_under_cursor()
+        vim.fn["phpactor#rpc"](
+          "class_new",
+          { ["current_path"] = "" .. node.absolute_path .. "", ["variant"] = "interface" }
+        )
+      end,
       "PHP Create interface",
     },
   },
 }
 -- more keybinds!
 
+M.aerial = {
+  -- plugin = true,
+  n = {
+    ["<leader>ls"] = {
+      function()
+        local aerial_avail, _ = pcall(require, "aerial")
+        if aerial_avail then
+          require("telescope").extensions.aerial.aerial()
+        else
+          require("telescope.builtin").lsp_document_symbols()
+        end
+      end,
+      "Search symbols",
+    },
+    ["<leader>lS"] = {
+      function()
+        require("aerial").toggle()
+      end,
+    },
+  },
+}
 return M

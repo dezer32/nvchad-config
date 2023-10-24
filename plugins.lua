@@ -35,6 +35,20 @@ local plugins = {
   {
     "nvim-tree/nvim-tree.lua",
     opts = overrides.nvimtree,
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+    },
+  },
+
+  {
+    "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("nvim-web-devicons").setup {
+        default = true,
+        strict = true,
+        color_icons = true,
+      }
+    end,
   },
 
   -- Install a plugin
@@ -45,6 +59,11 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
+
+  -- {
+  --   "friendsoftwig/twigcs",
+  --   ft = "twig",
+  -- },
 
   -- Debug
   {
@@ -184,6 +203,34 @@ local plugins = {
           },
         },
       }
+    end,
+  },
+  {
+    "stevearc/aerial.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("aerial").setup {
+        -- attach_mode = "global",
+        -- backends = { "lsp", "treesitter", "markdown", "man" },
+        -- disable_max_lines = vim.g.max_file.lines,
+        -- disable_max_size = vim.g.max_file.size,
+        -- layout = { min_width = 28 },
+        -- show_guides = true,
+        -- filter_kind = false,
+        -- guides = {
+        --   mid_item = "├ ",
+        --   last_item = "└ ",
+        --   nested_top = "│ ",
+        --   whitespace = "  ",
+        -- },
+      }
+
+      require("telescope").load_extension "aerial"
+
+      require("core.utils").load_mappings "aerial"
     end,
   },
 }
