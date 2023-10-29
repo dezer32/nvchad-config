@@ -57,14 +57,14 @@ M.tabufline = {
 M.nvterm = {
   plugin = true,
   n = {
-    ["<f7>"] = {
+    ["<f3>"] = {
       function()
         require("nvterm.terminal").toggle "float"
       end,
     },
   },
   t = {
-    ["<f7>"] = {
+    ["<f3>"] = {
       function()
         require("nvterm.terminal").toggle "float"
       end,
@@ -144,6 +144,11 @@ M.dap_go = {
         require("dap-go").debug_lats()
       end,
       "Debug last go test",
+    },
+    ["<F7>"] = {
+      function()
+        require("dap-go").debug_step_into()
+      end,
     },
   },
 }

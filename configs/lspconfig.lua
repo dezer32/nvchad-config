@@ -5,7 +5,8 @@ local lspconfig = require "lspconfig"
 local util = require "lspconfig/util"
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "css", "tsserver" }
+-- local servers = { "html", "css", "tsserver" }
+local servers = { "selene", "html", "cssls", "tsserver", "clangd" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -29,6 +30,9 @@ lspconfig.gopls.setup {
       analyses = {
         unusedparams = true,
       },
+      staticcheck = true,
+      gofumpt = true,
+      goimports = true,
     },
   },
 }

@@ -60,6 +60,15 @@ local plugins = {
     end,
   },
 
+  {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup()
+    end,
+  },
+
   -- {
   --   "friendsoftwig/twigcs",
   --   ft = "twig",
@@ -156,7 +165,8 @@ local plugins = {
       condition = nil,
       write_all_buffers = false, -- write all buffers when the current one meets `condition`
       noautocmd = false, -- do not execute autocmds when saving
-      debounce_delay = 1000, -- delay after which a pending save is executed
+      -- debounce_delay = 1000, -- delay after which a pending save is executed
+      debounce_delay = 5000, -- delay after which a pending save is executed
       -- log debug messages to 'auto-save.log' file in neovim cache directory, set to `true` to enable
       debug = false,
 

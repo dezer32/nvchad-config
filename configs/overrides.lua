@@ -9,7 +9,7 @@ M.treesitter = {
     "javascript",
     "typescript",
     "tsx",
-    -- "c",
+    "c",
     "markdown",
     "markdown_inline",
     "twig",
@@ -29,6 +29,7 @@ M.mason = {
     -- lua stuff
     "lua-language-server",
     "stylua",
+    "selene",
 
     -- web dev stuff
     "css-lsp",
@@ -38,15 +39,20 @@ M.mason = {
     "prettier",
 
     -- c/cpp stuff
-    -- "clangd",
-    -- "clang-format",
+    "clangd",
+    "clang-format",
 
     "phpactor",
     -- "phpcsfixer",
-    "php_cs_fixer",
+    "php-cs-fixer",
     "phpstan",
-    "php_debug_adapter",
+    "php-debug-adapter",
+
     "gopls",
+    "gofumpt",
+    "goimports-reviser",
+    "golangci-lint",
+    "golines",
   },
 }
 
