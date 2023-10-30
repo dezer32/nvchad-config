@@ -127,6 +127,21 @@ M.dap = {
       end,
       "Open debugging sidebar",
     },
+    ["<F7>"] = {
+      function()
+        require("dap").step_into()
+      end,
+    },
+    ["<F8>"] = {
+      function()
+        require("dap").step_over()
+      end,
+    },
+    ["<F9>"] = {
+      function()
+        require("dap").continue()
+      end,
+    },
   },
 }
 
@@ -144,11 +159,6 @@ M.dap_go = {
         require("dap-go").debug_lats()
       end,
       "Debug last go test",
-    },
-    ["<F7>"] = {
-      function()
-        require("dap-go").debug_step_into()
-      end,
     },
   },
 }
