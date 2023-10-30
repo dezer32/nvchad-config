@@ -119,14 +119,14 @@ M.dap = {
       "<cmd> DapToggleBreakpoint <CR>",
       "Add breakpoing at line",
     },
-    ["<leader>dus"] = {
-      function()
-        local widgets = require "dap.ui.widgets"
-        local sidebar = widgets.sidebar(widgets.scopes)
-        sidebar.open()
-      end,
-      "Open debugging sidebar",
-    },
+    -- ["<leader>dus"] = {
+    --   function()
+    --     local widgets = require "dap.ui.widgets"
+    --     local sidebar = widgets.sidebar(widgets.scopes)
+    --     sidebar.open()
+    --   end,
+    --   "Open debugging sidebar",
+    -- },
     ["<F7>"] = {
       function()
         require("dap").step_into()
@@ -141,6 +141,29 @@ M.dap = {
       function()
         require("dap").continue()
       end,
+    },
+    ["<F10>"] = {
+      function()
+        require("dap").restart()
+      end,
+    },
+  },
+}
+
+M.dapui = {
+  -- plugin = true,
+  n = {
+    ["<leader>dus"] = {
+      function()
+        require("dapui").float_element "scopes"
+      end,
+      "Debug scopes",
+    },
+    ["<leader>dui"] = {
+      function()
+        require("dapui").toggle()
+      end,
+      "Debug UI",
     },
   },
 }

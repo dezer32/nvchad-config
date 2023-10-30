@@ -82,6 +82,15 @@ local plugins = {
     end,
   },
   {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      { "mfussenegger/nvim-dap" },
+    },
+    config = function()
+      require "custom.configs.dapui"
+    end,
+  },
+  {
     "leoluz/nvim-dap-go",
     ft = "go",
     dependencies = {
