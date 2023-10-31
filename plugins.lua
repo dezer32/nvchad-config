@@ -77,6 +77,9 @@ local plugins = {
   -- Debug
   {
     "mfussenegger/nvim-dap",
+    dependencies = {
+      { "nvim-telescope/telescope-dap.nvim" },
+    },
     init = function()
       require("telescope").load_extension "dap"
       require("core.utils").load_mappings "dap"

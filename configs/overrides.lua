@@ -53,6 +53,7 @@ M.mason = {
     "goimports-reviser",
     "golangci-lint",
     "golines",
+    "delve",
   },
 }
 
