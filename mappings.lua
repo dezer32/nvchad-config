@@ -54,38 +54,58 @@ M.tabufline = {
   },
 }
 
-M.nvterm = {
-  plugin = true,
-  n = {
-    ["<f3>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-    },
-    -- ["<leader>gl"] = {
-    --   function()
-    --     _terminal_lazygit_toggle()
-    --   end,
-    --   "LazyGit",
-    -- },
-  },
-  t = {
-    ["<f3>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-    },
-  },
-}
+-- M.nvterm = {
+--   plugin = true,
+--   n = {
+--     ["<f3>"] = {
+--       function()
+--         require("nvterm.terminal").toggle "float"
+--       end,
+--     },
+--     -- ["<leader>gl"] = {
+--     --   function()
+--     --     _terminal_lazygit_toggle()
+--     --   end,
+--     --   "LazyGit",
+--     -- },
+--   },
+--   t = {
+--     ["<f3>"] = {
+--       function()
+--         require("nvterm.terminal").toggle "float"
+--       end,
+--     },
+--   },
+-- }
 
 M.toggleterm = {
   -- plugin = true,
   n = {
     ["<leader>gl"] = {
       function()
-        _terminal_lazygit_toggle()
+        require("custom.configs.toggletermconfig")._term_toggle_lazygit()
+        -- _terminal_lazygit_toggle()
       end,
       "LazyGit",
+    },
+    ["<F3>"] = {
+      function()
+        require("custom.configs.toggletermconfig")._term_toggle_zsh()
+      end,
+    },
+  },
+  t = {
+    ["<leader>gl"] = {
+      function()
+        require("custom.configs.toggletermconfig")._term_toggle_lazygit()
+        -- _terminal_lazygit_toggle()
+      end,
+      "LazyGit",
+    },
+    ["<F3>"] = {
+      function()
+        require("custom.configs.toggletermconfig")._term_toggle_zsh()
+      end,
     },
   },
 }

@@ -44,8 +44,8 @@ local plugins = {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = function(_, opts)
-      require("toggleterm").setup()
-      require "custom.configs.toggletermconfig"
+      require("toggleterm").setup(opts)
+      -- require "custom.configs.toggletermconfig"
       require("core.utils").load_mappings "toggleterm"
     end,
   },
