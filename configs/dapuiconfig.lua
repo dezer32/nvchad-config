@@ -1,7 +1,6 @@
-local dap, dapui = require "dap", require "dapui"
-require("core.utils").load_mappings "dapui"
+local options = {}
 
-local layouts = {
+options.layouts = {
   {
     -- You can change the order of elements in the sidebar
     elements = {
@@ -31,11 +30,6 @@ local layouts = {
 --   indent = 1,
 -- }
 
-dapui.setup {
-  layouts = layouts,
-  -- render = render,
-}
-
 -- dap.listeners.after["event_initialized"]["dapui_config"] = function(session, body)
 --   print("Session terminated", vim.inspect(session), vim.inspect(body))
 --   dapui.open()
@@ -48,3 +42,5 @@ dapui.setup {
 --   print("Session terminated", vim.inspect(session), vim.inspect(body))
 --   dapui.close()
 -- end
+
+return options

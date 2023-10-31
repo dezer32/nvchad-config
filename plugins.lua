@@ -78,6 +78,7 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     init = function()
+      require("telescope").load_extension "dap"
       require("core.utils").load_mappings "dap"
     end,
   },
@@ -86,8 +87,22 @@ local plugins = {
     dependencies = {
       { "mfussenegger/nvim-dap" },
     },
-    config = function()
-      require "custom.configs.dapui"
+    opts = function()
+      return require "custom.configs.dapuiconfig"
+    end,
+    config = function(_, opts)
+      require("dapui").setup(opts)
+      require("core.utils").load_mappings "dapui"
+    end,
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text",
+    dependencies = {
+      { "mfussenegger/nvim-dap" },
+      { "nvim-treesitter/nvim-treesitter" },
+    },
+    config = function(_, opts)
+      require("nvim-dap-virtual-text").setup(opts)
     end,
   },
   {
