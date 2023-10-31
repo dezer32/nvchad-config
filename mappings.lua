@@ -62,12 +62,30 @@ M.nvterm = {
         require("nvterm.terminal").toggle "float"
       end,
     },
+    -- ["<leader>gl"] = {
+    --   function()
+    --     _terminal_lazygit_toggle()
+    --   end,
+    --   "LazyGit",
+    -- },
   },
   t = {
     ["<f3>"] = {
       function()
         require("nvterm.terminal").toggle "float"
       end,
+    },
+  },
+}
+
+M.toggleterm = {
+  -- plugin = true,
+  n = {
+    ["<leader>gl"] = {
+      function()
+        _terminal_lazygit_toggle()
+      end,
+      "LazyGit",
     },
   },
 }

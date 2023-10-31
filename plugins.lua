@@ -41,6 +41,16 @@ local plugins = {
   },
 
   {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function(_, opts)
+      require("toggleterm").setup()
+      require "custom.configs.toggletermconfig"
+      require("core.utils").load_mappings "toggleterm"
+    end,
+  },
+
+  {
     "nvim-tree/nvim-web-devicons",
     config = function()
       require("nvim-web-devicons").setup {
@@ -68,6 +78,14 @@ local plugins = {
       require("nvim-surround").setup()
     end,
   },
+
+  -- {
+  --   "kdheepak/lazygit.nvim",
+  --   -- optional for floating window border decoration
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --   },
+  -- },
 
   -- {
   --   "friendsoftwig/twigcs",
