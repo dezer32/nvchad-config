@@ -23,6 +23,8 @@ local sources = {
 
   -- cpp
   b.formatting.clang_format,
+  -- another
+  b.formatting.ansible_lint,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
