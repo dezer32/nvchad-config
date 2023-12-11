@@ -27,6 +27,8 @@ local sources = {
 
   -- markdown
   b.formatting.markdownlint,
+  -- another
+  b.formatting.ansible_lint,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

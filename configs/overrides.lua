@@ -15,6 +15,7 @@ M.treesitter = {
     "twig",
     "php",
     "go",
+    -- "ansible",
   },
   indent = {
     enable = true,
@@ -42,18 +43,24 @@ M.mason = {
     "clangd",
     "clang-format",
 
+    -- php
     "phpactor",
     -- "phpcsfixer",
     "php-cs-fixer",
     "phpstan",
     "php-debug-adapter",
 
+    -- go
     "gopls",
     "gofumpt",
     "goimports-reviser",
     "golangci-lint",
     "golines",
     "delve",
+
+    -- ansible
+    "ansible-language-server",
+    "ansible-lint",
   },
 }
 
