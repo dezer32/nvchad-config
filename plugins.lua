@@ -243,6 +243,16 @@ local plugins = {
     end,
   },
 
+  -- {
+  --k  "stephpy/vim-php-cs-fixer",
+  --   ft = "php",
+  --   opts = {
+  --     php_cs_fixer_path = "./vendor/bin/php-cs-fixer",
+  --   },
+  --   -- config = function(_, opts)
+  --   --   require("vim-php-cs-fixer").setup(opts)
+  --   -- end,
+  -- },
   {
     "nvim-neotest/neotest",
     dependencies = {

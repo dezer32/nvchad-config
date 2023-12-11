@@ -9,6 +9,7 @@ local sources = {
   b.formatting.phpcsfixer.with {
     args = { "--no-interaction", "--quiet", "fix", "$FILENAME", "--using-cache=no" },
   },
+  -- b.formatting.phpcsfixer,
   -- twig
   -- go
   b.formatting.gofumpt,
@@ -23,6 +24,9 @@ local sources = {
 
   -- cpp
   b.formatting.clang_format,
+
+  -- markdown
+  b.formatting.markdownlint,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
