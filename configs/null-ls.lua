@@ -26,9 +26,11 @@ local sources = {
   b.formatting.clang_format,
 
   -- markdown
-  b.formatting.markdownlint,
+  -- b.formatting.markdownlint,
+  b.diagnostics.markdownlint,
   -- another
-  b.formatting.ansible_lint,
+  -- b.formatting.ansible_lint,
+  b.diagnostics.ansible_lint,
 }
 
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})

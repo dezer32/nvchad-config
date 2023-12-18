@@ -5,6 +5,11 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
+  statusline = {
+    theme = "minimal",
+    -- separator_style = "round",
+  },
+
   theme = "decay",
   theme_toggle = { "decay", "one_light" },
 

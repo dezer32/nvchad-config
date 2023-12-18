@@ -41,6 +41,11 @@ local plugins = {
   },
 
   {
+    "nvim-telescope/telescope.nvim",
+    opts = require "custom.configs.telescope",
+  },
+
+  {
     "akinsho/toggleterm.nvim",
     version = "*",
     config = function(_, opts)
@@ -48,6 +53,7 @@ local plugins = {
       -- require "custom.configs.toggletermconfig"
       require("core.utils").load_mappings "toggleterm"
     end,
+    lazy = true,
   },
 
   {
@@ -68,6 +74,7 @@ local plugins = {
     config = function()
       require("better_escape").setup()
     end,
+    lazy = true,
   },
 
   {
@@ -77,6 +84,7 @@ local plugins = {
     config = function()
       require("nvim-surround").setup()
     end,
+    lazy = true,
   },
 
   -- {
@@ -96,12 +104,13 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     dependencies = {
-      { "nvim-telescope/telescope-dap.nvim" },
+      { "nvim-telescope/telescope-dap.nvim", lazy = true },
     },
     init = function()
       require("telescope").load_extension "dap"
       require("core.utils").load_mappings "dap"
     end,
+    lazy = true,
   },
   {
     "rcarriga/nvim-dap-ui",
@@ -115,6 +124,7 @@ local plugins = {
       require("dapui").setup(opts)
       require("core.utils").load_mappings "dapui"
     end,
+    lazy = true,
   },
   {
     "theHamsta/nvim-dap-virtual-text",
@@ -125,6 +135,7 @@ local plugins = {
     config = function(_, opts)
       require("nvim-dap-virtual-text").setup(opts)
     end,
+    lazy = true,
   },
   {
     "leoluz/nvim-dap-go",
@@ -136,6 +147,7 @@ local plugins = {
       require("dap-go").setup(opts)
       require("core.utils").load_mappings "dap_go"
     end,
+    lazy = true,
   },
 
   -- Go
@@ -149,6 +161,7 @@ local plugins = {
     build = function()
       vim.cmd [[silent! GoInstallDeps]]
     end,
+    lazy = true,
   },
 
   -- To make a plugin not be loaded
@@ -176,6 +189,7 @@ local plugins = {
       require("telescope").load_extension "goimpl"
       require("core.utils").load_mappings "goimpl"
     end,
+    lazy = true,
   },
   {
     "smoka7/hop.nvim",
@@ -241,6 +255,7 @@ local plugins = {
       -- require("phpactor").setup(opts)
       require("core.utils").load_mappings "phpactor"
     end,
+    lazy = true,
   },
 
   -- {
@@ -269,6 +284,7 @@ local plugins = {
         },
       }
     end,
+    lazy = true,
   },
   {
     "stevearc/aerial.nvim",
@@ -320,6 +336,7 @@ local plugins = {
 
       require("core.utils").load_mappings "aerial"
     end,
+    lazy = true,
   },
 
   -- themes

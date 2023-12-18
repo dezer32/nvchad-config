@@ -4,17 +4,20 @@ M.treesitter = {
   ensure_installed = {
     "vim",
     "lua",
+    --
     "html",
     "css",
     "javascript",
     "typescript",
     "tsx",
+    --
     "c",
+    "php",
+    "go",
+    --
     "markdown",
     "markdown_inline",
     "twig",
-    "php",
-    "go",
     -- "ansible",
   },
   indent = {
