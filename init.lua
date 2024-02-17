@@ -17,6 +17,7 @@ local autocmd = vim.api.nvim_create_autocmd
 -- })
 
 opt.relativenumber = true
+
 opt.scrolloff = 20
 
 autocmd("BufWritePre", {
