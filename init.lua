@@ -6,9 +6,7 @@ local autocmd = vim.api.nvim_create_autocmd
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
-
 -- autocmd BufWritePre (InsertLeave?) <buffer> lua vim.lsp.buf.formatting_sync(nil,500)
-
 -- autocmd('BufWritePre', {
 --   pattern = "*.go",
 --   callback = function ()
