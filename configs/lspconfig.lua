@@ -7,13 +7,13 @@ local util = require "lspconfig/util"
 -- if you just want default config for the servers then put them in a table
 -- local servers = { "html", "css", "tsserver" }
 local servers = {
-  "ansible-language-server",
+  -- "ansible-language-server",
   "grammarly",
   "marksman",
-  "phpcsfixer",
+  -- "phpcsfixer",
   "lua_ls",
-  "delve",
-  "selene",
+  -- "delve",
+  -- "selene",
   "html",
   "cssls",
   "tsserver",
