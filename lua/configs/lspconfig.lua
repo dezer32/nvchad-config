@@ -7,20 +7,20 @@ local lspconfig = require "lspconfig"
 local servers = { "html", "cssls", "lua_ls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
-local overridedOnAttach = function(client, bufer)
-  nvlsp.on_attach(client, bufer)
+local overridedOnAttach = function(client, bufnr)
+  nvlsp.on_attach(client, bufnr)
 
   vim.keymap.set(
     "n",
     "gi",
     require("telescope.builtin").lsp_implementations,
-    { buffer = bufer, desc = "Telescope LSP implementations" }
+    { buffer = bufnr, desc = "Telescope LSP implementations" }
   )
   vim.keymap.set(
     "n",
     "gd",
     require("telescope.builtin").lsp_references,
-    { buffer = bufer, desc = "Telescope LSP references" }
+    { buffer = bufnr, desc = "Telescope LSP references" }
   )
 end
 
