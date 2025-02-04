@@ -3,12 +3,27 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
+local del = vim.keymap.del
 
-map("n", ";", ":", { desc = "CMD enter command mode" })
+-- map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+map("i", "jj", "<ESC>")
 
 -- map("n", "<leader>li", function()
-  -- require("telescope.builtin").lsp_implementations()
+-- require("telescope.builtin").lsp_implementations()
 -- end, { desc = "LSP Implementations (Telescope)" })
 
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map({ "n" }, "<leader>w", "<cmd> w <cr>")
+
+-- Telescope
+local telescope = require "telescope.builtin"
+map("n", "<leader>gi", telescope.lsp_implementations, { desc = "Telescope LSP Implementations" })
+map("n", "<leader>gr", telescope.lsp_references, { desc = "Telescope LSP Implementations", remap = false })
+
+-- Spectre
+local spectre = require "spectre"
+map("n", "<leader>rr", spectre.toggle, { desc = "Toggle Spectre" })
+map("v", "<leader>rw", spectre.open_visual, { desc = "Search current word" })
+map("n", "<leader>rw", spectre.open_visual, { desc = "Toggle Visaal Spectre" })
+map("n", "<leader>rp", spectre.open_file_search, { desc = "Toggle Visaal Spectre" })
