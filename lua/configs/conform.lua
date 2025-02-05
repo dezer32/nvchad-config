@@ -6,6 +6,7 @@ local options = {
     lua = { "stylua" },
     css = { "prettier" },
     html = { "prettier" },
+    json = { "fixjson" },
     php = { "php_cs_fixer" },
   },
 
