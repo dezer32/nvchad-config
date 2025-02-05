@@ -13,7 +13,7 @@ end
 
 local namespace = require "modules.php_namespace"
 
-ls.add_snippets("all", {
+ls.add_snippets("php", {
   s("phpclass", {
     t {
       "<?php",
@@ -29,7 +29,29 @@ ls.add_snippets("all", {
       "class ",
     },
     f(filename, {}),
-    t { " {", "" },
+    t { " {", "\t" },
+    i(1, "Your code here..."),
+    t { "", "}" },
+  }),
+})
+
+ls.add_snippets("php", {
+  s("phpint", {
+    t {
+      "<?php",
+      "",
+      "declare(strict_types=1);",
+      "",
+      "namespace ",
+    },
+    f(require("modules.php_namespace").generate_namespace, {}),
+    t {
+      ";",
+      "",
+      "interface ",
+    },
+    f(filename, {}),
+    t { " {", "\t" },
     i(1, "Your code here..."),
     t { "", "}" },
   }),
