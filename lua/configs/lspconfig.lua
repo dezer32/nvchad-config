@@ -18,7 +18,7 @@ local overridedOnAttach = function(client, bufnr)
   )
   vim.keymap.set(
     "n",
-    "gd",
+    "gr",
     require("telescope.builtin").lsp_references,
     { buffer = bufnr, desc = "Telescope LSP references" }
   )

@@ -15,10 +15,22 @@ return {
         ["<Esc>"] = actions.close,
       }
 
-      conf.defaults.mappings.n = {
-        ["gi"] = builtin.lsp_implementations,
-        ["gr"] = builtin.lsp_references,
-      }
+      local get_telescope_ignore = function()
+        local f = assert(io.open(vim.fn.getcwd() .. "/.telescope_ignore", "rb"))
+        -- local f = io.open(vim.fn.getcwd() .. "/.telescope_ignore", "rb")
+
+        local arr = {}
+        if f then
+          for line in f:lines() do
+            table.insert(arr, line)
+          end
+          f:close()
+        end
+
+        return arr
+      end
+
+      conf.defaults.file_ignore_patterns = get_telescope_ignore()
 
       -- or
       -- table.insert(conf.defaults.mappings.i, your table)
