@@ -10,18 +10,12 @@ local nvlsp = require "nvchad.configs.lspconfig"
 local overridedOnAttach = function(client, bufnr)
   nvlsp.on_attach(client, bufnr)
 
-  vim.keymap.set(
-    "n",
-    "gi",
-    require("telescope.builtin").lsp_implementations,
-    { buffer = bufnr, desc = "Telescope LSP implementations" }
-  )
-  vim.keymap.set(
-    "n",
-    "gr",
-    require("telescope.builtin").lsp_references,
-    { buffer = bufnr, desc = "Telescope LSP references" }
-  )
+  local s = vim.keymap.set
+  local fzf = require "fzf-lua"
+  s("n", "gi", fzf.lsp_implementations, { buffer = bufnr, noremap = true, silent = true, desc = "FZF implementations" })
+  s("n", "gr", fzf.lsp_references, { buffer = bufnr, noremap = true, silent = true, desc = "FZF references" })
+  s("n", "gd", fzf.lsp_definitions, { buffer = bufnr, noremap = true, silent = true, desc = "FZF definitions" })
+  s("n", "gD", fzf.lsp_declarations, { buffer = bufnr, noremap = true, silent = true, desc = "FZF declarations" })
 end
 
 -- lsps with default config

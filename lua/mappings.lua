@@ -12,17 +12,8 @@ map("i", "jj", "<ESC>")
 map ("n", "[b", "<cmd> bprevious <cr>", {desc="Prevous buffer"})
 map ("n", "]b", "<cmd> bnext <cr>", {desc="Next buffer"})
 
--- map("n", "<leader>li", function()
--- require("telescope.builtin").lsp_implementations()
--- end, { desc = "LSP Implementations (Telescope)" })
-
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map({ "n" }, "<leader>w", "<cmd> w <cr>")
-
--- Telescope
-local telescope = require "telescope.builtin"
-map("n", "<leader>gi", telescope.lsp_implementations, { desc = "Telescope LSP Implementations" })
-map("n", "<leader>gr", telescope.lsp_references, { desc = "Telescope LSP Implementations", remap = false })
 
 -- fzf-lua
 local fzf = require "fzf-lua"
