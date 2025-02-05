@@ -15,9 +15,20 @@ return {
         ["<Esc>"] = actions.close,
       }
 
+      -- conf.defaults.find_command = { "fd", "--type", "d", "--hidden", "--follow", "--no-ignore", "--exclude", ".git" }
+
+      -- conf.defaults.mappings.n = {
+      --   ["<leader>ff"] = function()
+      --     builtin.find_files {
+      --       find_command = { "fd", "--type", "f", "--hidden", "--follow", "--no-ignore", "--exclude", ".git" },
+      --     }
+      --   end,
+      --   { noremap = true, silent = true },
+      -- }
+
       local get_telescope_ignore = function()
-        local f = assert(io.open(vim.fn.getcwd() .. "/.telescope_ignore", "rb"))
-        -- local f = io.open(vim.fn.getcwd() .. "/.telescope_ignore", "rb")
+        -- local f = assert(io.open(vim.fn.getcwd() .. "/.telescope_ignore", "rb"))
+        local f = io.open(vim.fn.getcwd() .. "/.telescope_ignore", "rb")
 
         local arr = {}
         if f then

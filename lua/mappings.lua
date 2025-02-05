@@ -21,6 +21,19 @@ local telescope = require "telescope.builtin"
 map("n", "<leader>gi", telescope.lsp_implementations, { desc = "Telescope LSP Implementations" })
 map("n", "<leader>gr", telescope.lsp_references, { desc = "Telescope LSP Implementations", remap = false })
 
+-- fzf-lua
+local fzf = require "fzf-lua"
+map("n", "<leader>fb", fzf.buffers, { noremap = true, silent = true, desc = "FZF Buffers" })
+map("n", "<leader>ff", fzf.files, { noremap = true, silent = true, desc = "FZF Files" })
+map("n", "<leader>fa", function()
+  fzf.files {
+    previewer = "bat",
+    formatter = "path.filename_first",
+    follow = true,
+    no_ignore = true,
+  }
+end, { noremap = true, silent = true, desc = "FZF All files" })
+
 -- Spectre
 local spectre = require "spectre"
 map("n", "<leader>rr", spectre.toggle, { desc = "Toggle Spectre" })
