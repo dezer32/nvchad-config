@@ -6,10 +6,19 @@ return {
   -- dependencies = { "echasnovski/mini.icons" },
   opts = {
     files = {
-      previewer = "bat",
+      -- previewer = "bat",
       formatter = "path.filename_first",
       -- path_shorten = 5,
       -- cwd_prompt = false,
+    },
+    lsp = {
+      -- previewer = "bat",
+      formatter = "path.filename_first",
+      cwd_only = true,
+      finder = {
+        -- previewer = "bat",
+        formatter = "path.filename_first",
+      },
     },
     winopts = {
       preview = {

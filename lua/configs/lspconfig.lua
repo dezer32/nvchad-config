@@ -12,6 +12,7 @@ local overridedOnAttach = function(client, bufnr)
 
   local s = vim.keymap.set
   local fzf = require "fzf-lua"
+  s("n", "ga", fzf.lsp_finder, { buffer = bufnr, noremap = true, silent = true, desc = "FZF finder" })
   s("n", "gi", fzf.lsp_implementations, { buffer = bufnr, noremap = true, silent = true, desc = "FZF implementations" })
   s("n", "gr", fzf.lsp_references, { buffer = bufnr, noremap = true, silent = true, desc = "FZF references" })
   s("n", "gd", fzf.lsp_definitions, { buffer = bufnr, noremap = true, silent = true, desc = "FZF definitions" })

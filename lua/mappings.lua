@@ -9,14 +9,15 @@ local del = vim.keymap.del
 map("i", "jk", "<ESC>")
 map("i", "jj", "<ESC>")
 
-map ("n", "[b", "<cmd> bprevious <cr>", {desc="Prevous buffer"})
-map ("n", "]b", "<cmd> bnext <cr>", {desc="Next buffer"})
+map("n", "[b", "<cmd> bprevious <cr>", { desc = "Prevous buffer" })
+map("n", "]b", "<cmd> bnext <cr>", { desc = "Next buffer" })
 
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 map({ "n" }, "<leader>w", "<cmd> w <cr>")
 
 -- fzf-lua
 local fzf = require "fzf-lua"
+map("n", "<leader>gs", fzf.lsp_document_symbols, { noremap = true, silent = true, desc = "FZF document symbols" })
 map("n", "<leader>fb", fzf.buffers, { noremap = true, silent = true, desc = "FZF Buffers" })
 map("n", "<leader>ff", fzf.files, { noremap = true, silent = true, desc = "FZF Files" })
 map("n", "<leader>fa", function()
