@@ -56,3 +56,17 @@ ls.add_snippets("php", {
     t { "", "}" },
   }),
 })
+
+ls.add_snippets("php", {
+  s("pubf", {
+    t "public function ",
+    i(1),
+    t " (",
+    i(2),
+    t "): ",
+    i(3),
+    t { " {", "\t" },
+    i(4, "Your code here.."),
+    t { "", "}" },
+  }),
+})

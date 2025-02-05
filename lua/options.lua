@@ -7,6 +7,3 @@ require "configs.snippets"
 local o = vim.o
 o.cursorlineopt = "both" -- to enable cursorline!
 o.scrolloff = 20
-
--- local g = vim.g
--- g.vscode_snippets_path = vim.fn.stdpath "config" .. "/snippets"

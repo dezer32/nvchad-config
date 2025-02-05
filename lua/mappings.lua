@@ -9,6 +9,9 @@ local del = vim.keymap.del
 map("i", "jk", "<ESC>")
 map("i", "jj", "<ESC>")
 
+map ("n", "[b", "<cmd> bprevious <cr>", {desc="Prevous buffer"})
+map ("n", "]b", "<cmd> bnext <cr>", {desc="Next buffer"})
+
 -- map("n", "<leader>li", function()
 -- require("telescope.builtin").lsp_implementations()
 -- end, { desc = "LSP Implementations (Telescope)" })
