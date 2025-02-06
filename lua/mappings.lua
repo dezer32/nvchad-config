@@ -22,12 +22,14 @@ map("n", "<leader>fb", fzf.buffers, { noremap = true, silent = true, desc = "FZF
 map("n", "<leader>ff", fzf.files, { noremap = true, silent = true, desc = "FZF Files" })
 map("n", "<leader>fa", function()
   fzf.files {
-    previewer = "bat",
     formatter = "path.filename_first",
     follow = true,
     no_ignore = true,
   }
 end, { noremap = true, silent = true, desc = "FZF All files" })
+map("n", "<leader>fw", fzf.live_grep, { noremap = true, silent = true, desc = "FZF live grep" })
+map("n", "<leader>gb", fzf.git_blame, { noremap = true, silent = true, desc = "FZF git blame" })
+map("n", "<leader>gc", fzf.git_commits, { noremap = true, silent = true, desc = "FZF git commits" })
 
 -- Spectre
 local spectre = require "spectre"
@@ -35,3 +37,8 @@ map("n", "<leader>rr", spectre.toggle, { desc = "Toggle Spectre" })
 map("v", "<leader>rw", spectre.open_visual, { desc = "Search current word" })
 map("n", "<leader>rw", spectre.open_visual, { desc = "Toggle Visaal Spectre" })
 map("n", "<leader>rp", spectre.open_file_search, { desc = "Toggle Visaal Spectre" })
+
+-- Terminal
+map({ "n", "t" }, "<leader>tt", function()
+  require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
+end, { desc = "Terminal Toggle Floating term" })
