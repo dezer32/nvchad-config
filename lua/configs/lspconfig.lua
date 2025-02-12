@@ -17,6 +17,7 @@ local overridedOnAttach = function(client, bufnr)
   s("n", "gr", fzf.lsp_references, { buffer = bufnr, noremap = true, silent = true, desc = "FZF references" })
   s("n", "gd", fzf.lsp_definitions, { buffer = bufnr, noremap = true, silent = true, desc = "FZF definitions" })
   s("n", "gD", fzf.lsp_declarations, { buffer = bufnr, noremap = true, silent = true, desc = "FZF declarations" })
+  s("n", "gt", fzf.lsp_typedefs, { buffer = bufnr, noremap = true, silent = true, desc = "FZF declarations" })
 end
 
 -- lsps with default config
