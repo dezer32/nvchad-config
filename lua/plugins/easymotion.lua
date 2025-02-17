@@ -7,8 +7,8 @@ return {
 
     -- vim.api.nvim_set_keymap('n', '<Leader>w', '<Plug>(easymotion-w)', {})
     -- vim.api.nvim_set_keymap("n", "<leader>e", "<Plug>(easymotion-e)", {})
-    vim.api.nvim_set_keymap("n", "<leader>f", "<Plug>(easymotion-f)", {})
-    vim.api.nvim_set_keymap("n", "<leader>j", "<Plug>(easymotion-j)", {})
-    vim.api.nvim_set_keymap("n", "<leader>k", "<Plug>(easymotion-k)", {})
+    -- vim.api.nvim_set_keymap("n", "<leader>ff", "<Plug>(easymotion-f)", {})
+    -- vim.api.nvim_set_keymap("n", "<leader>fj", "<Plug>(easymotion-j)", {})
+    -- vim.api.nvim_set_keymap("n", "<leader>fk", "<Plug>(easymotion-k)", {})
   end,
 }
