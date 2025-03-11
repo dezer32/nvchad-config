@@ -20,6 +20,38 @@ local fzf = require "fzf-lua"
 map("n", "<leader>gs", fzf.lsp_document_symbols, { noremap = true, silent = true, desc = "FZF document symbols" })
 map("n", "<leader>fb", fzf.buffers, { noremap = true, silent = true, desc = "FZF Buffers" })
 map("n", "<leader>ff", fzf.files, { noremap = true, silent = true, desc = "FZF Files" })
+map("n", "<leader>fc", function()
+  require("fzf-lua").lsp_live_workspace_symbols {
+    prompt = "Find class ❯ ",
+    async = false,
+    -- Array = 18,
+    -- Boolean = 17,
+    -- Class = 5,
+    -- Constant = 14,
+    -- Constructor = 9,
+    -- Enum = 10,
+    -- EnumMember = 22,
+    -- Event = 24,
+    -- Field = 8,
+    -- File = 1,
+    -- Function = 12,
+    -- Interface = 11,
+    -- Key = 20,
+    -- Method = 6,
+    -- Module = 2,
+    -- Namespace = 3,
+    -- Null = 21,
+    -- Number = 16,
+    -- Object = 19,
+    -- Operator = 25,
+    -- Package = 4,
+    -- Property = 7,
+    -- String = 15,
+    -- Struct = 23,
+    -- TypeParameter = 26,
+    -- Variable = 13
+  }
+end)
 map("n", "<leader>fa", function()
   fzf.files {
     formatter = "path.filename_first",
@@ -30,6 +62,7 @@ end, { noremap = true, silent = true, desc = "FZF All files" })
 map("n", "<leader>fw", fzf.live_grep, { noremap = true, silent = true, desc = "FZF live grep" })
 map("n", "<leader>gb", fzf.git_blame, { noremap = true, silent = true, desc = "FZF git blame" })
 map("n", "<leader>gc", fzf.git_commits, { noremap = true, silent = true, desc = "FZF git commits" })
+-- map("n", "<leader>ca", fzf.lsp_code_actions, { noremap = true, silent = true, desc = "FZF code action" })
 
 -- Spectre
 local spectre = require "spectre"

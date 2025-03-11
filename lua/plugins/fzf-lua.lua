@@ -39,7 +39,7 @@ return {
     },
     lsp = {
       -- previewer = "bat",
-      jump_to_single_result = true,
+      -- jump_to_single_result = true,
       formatter = "path.filename_first",
       cwd_only = true,
       finder = {
