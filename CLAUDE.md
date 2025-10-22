@@ -39,7 +39,7 @@ lua/
 - `require "nvchad.mappings"` then add/override keybindings
 - LSP `on_attach` is overridden to use FZF-lua for LSP navigation
 
-**LSP Integration**: All LSP navigation commands (definitions, references, implementations) are routed through FZF-lua instead of native vim.lsp functions for a unified fuzzy-finding experience.
+**LSP Integration**: Uses the modern `vim.lsp.config` API (Neovim 0.11+) instead of the deprecated `require('lspconfig')` framework. All LSP navigation commands (definitions, references, implementations) are routed through FZF-lua for a unified fuzzy-finding experience.
 
 ## Language Server Setup
 
@@ -47,6 +47,13 @@ lua/
 - `lua_ls` - Lua with Neovim-specific configuration
 - `html` - HTML
 - `cssls` - CSS
+- `ts_ls` - TypeScript/JavaScript with inlay hints
+- `pyright` - Python with type checking
+- `gopls` - Go with static check and gofumpt
+- `jsonls` - JSON with schema store integration
+- `yamlls` - YAML with Kubernetes schemas
+- `dockerls` - Dockerfile
+- `docker_compose_language_service` - Docker Compose
 - `intelephense` - PHP (requires license key in `~/.intelephense`)
 
 ### LSP Keybindings (in lua/configs/lspconfig.lua)
@@ -136,9 +143,28 @@ Custom module at `lua/modules/php_namespace/init.lua` provides PSR-4 compliant n
 Add to `lua/plugins/*.lua` following the lazy.nvim spec. Create a new file or add to `init.lua`.
 
 ### Adding LSP Servers
-1. Add server name to `servers` array in `lua/configs/lspconfig.lua`
-2. For servers requiring special config, add dedicated setup block (see intelephense example)
-3. Use `overridedOnAttach` to maintain FZF-lua integration
+
+**Method 1: Simple servers (using defaults)**
+Add server name to `servers` array in `lua/configs/lspconfig.lua`. The loop will automatically configure it with `vim.lsp.config()` and `vim.lsp.enable()`.
+
+**Method 2: Servers requiring custom configuration**
+Add a dedicated block after the loop using the modern API pattern:
+```lua
+vim.lsp.config("server_name", {
+  on_attach = overridedOnAttach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    -- server-specific settings
+  },
+})
+vim.lsp.enable("server_name")
+```
+
+**Important**:
+- Always use `vim.lsp.config()` instead of the deprecated `require('lspconfig')` pattern
+- All servers must call `vim.lsp.enable()` after configuration
+- Use `overridedOnAttach` to maintain FZF-lua integration and navic breadcrumbs
 
 ### Modifying Keybindings
 Edit `lua/mappings.lua`. Use `vim.keymap.set` to add mappings, `vim.keymap.del` to remove NvChad defaults.

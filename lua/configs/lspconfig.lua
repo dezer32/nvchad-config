@@ -1,13 +1,10 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-
 -- LSP servers to configure
 local servers = {
   "html",
   "cssls",
-  "lua_ls",
   "ts_ls", -- TypeScript/JavaScript
   "pyright", -- Python
   "gopls", -- Go
@@ -54,14 +51,15 @@ end
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
+  vim.lsp.config(lsp, {
     on_attach = overridedOnAttach,
     on_init = nvlsp.on_init,
     capabilities = nvlsp.capabilities,
-  }
+  })
+  vim.lsp.enable(lsp)
 end
 
-lspconfig.lua_ls.setup {
+vim.lsp.config("lua_ls", {
   on_attach = overridedOnAttach,
   capabilities = nvlsp.capabilities,
   on_init = function(client)
@@ -92,7 +90,8 @@ lspconfig.lua_ls.setup {
     end
     return true
   end,
-}
+})
+vim.lsp.enable("lua_ls")
 
 local get_intelephense_license = function()
   local f = assert(io.open(os.getenv "HOME" .. "/.intelephense", "rb"))
@@ -101,17 +100,18 @@ local get_intelephense_license = function()
   return string.gsub(content, "%s+", "")
 end
 
-lspconfig.intelephense.setup {
+vim.lsp.config("intelephense", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
   init_options = {
     licenceKey = get_intelephense_license(),
   },
-}
+})
+vim.lsp.enable("intelephense")
 
 -- TypeScript/JavaScript LSP
-lspconfig.ts_ls.setup {
+vim.lsp.config("ts_ls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
@@ -139,10 +139,11 @@ lspconfig.ts_ls.setup {
       },
     },
   },
-}
+})
+vim.lsp.enable("ts_ls")
 
 -- Python LSP
-lspconfig.pyright.setup {
+vim.lsp.config("pyright", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
@@ -156,10 +157,11 @@ lspconfig.pyright.setup {
       },
     },
   },
-}
+})
+vim.lsp.enable("pyright")
 
 -- Go LSP
-lspconfig.gopls.setup {
+vim.lsp.config("gopls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
@@ -172,10 +174,11 @@ lspconfig.gopls.setup {
       gofumpt = true,
     },
   },
-}
+})
+vim.lsp.enable("gopls")
 
 -- JSON LSP with schemas
-lspconfig.jsonls.setup {
+vim.lsp.config("jsonls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
@@ -185,10 +188,11 @@ lspconfig.jsonls.setup {
       validate = { enable = true },
     },
   },
-}
+})
+vim.lsp.enable("jsonls")
 
 -- YAML LSP with Kubernetes schemas
-lspconfig.yamlls.setup {
+vim.lsp.config("yamlls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
@@ -205,4 +209,5 @@ lspconfig.yamlls.setup {
       validate = true,
     },
   },
-}
+})
+vim.lsp.enable("yamlls")
