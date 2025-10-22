@@ -3,12 +3,31 @@ require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
--- EXAMPLE
-local servers = { "html", "cssls", "lua_ls" }
+-- LSP servers to configure
+local servers = {
+  "html",
+  "cssls",
+  "lua_ls",
+  "ts_ls", -- TypeScript/JavaScript
+  "pyright", -- Python
+  "gopls", -- Go
+  "jsonls", -- JSON
+  "yamlls", -- YAML
+  "dockerls", -- Dockerfile
+  "docker_compose_language_service", -- Docker Compose
+}
 local nvlsp = require "nvchad.configs.lspconfig"
 
 local overridedOnAttach = function(client, bufnr)
   nvlsp.on_attach(client, bufnr)
+
+  -- Attach navic for breadcrumbs
+  if client.server_capabilities.documentSymbolProvider then
+    local navic_ok, navic = pcall(require, "nvim-navic")
+    if navic_ok then
+      navic.attach(client, bufnr)
+    end
+  end
 
   local s = vim.keymap.set
   local fzf = require "fzf-lua"
@@ -85,14 +104,105 @@ end
 lspconfig.intelephense.setup {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
   init_options = {
     licenceKey = get_intelephense_license(),
   },
 }
 
--- configuring single server, example: typescript
--- lspconfig.ts_ls.setup {
---   on_attach = nvlsp.on_attach,
---   on_init = nvlsp.on_init,
---   capabilities = nvlsp.capabilities,
--- }
+-- TypeScript/JavaScript LSP
+lspconfig.ts_ls.setup {
+  on_attach = overridedOnAttach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+    javascript = {
+      inlayHints = {
+        includeInlayParameterNameHints = "all",
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = true,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = true,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+  },
+}
+
+-- Python LSP
+lspconfig.pyright.setup {
+  on_attach = overridedOnAttach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "workspace",
+      },
+    },
+  },
+}
+
+-- Go LSP
+lspconfig.gopls.setup {
+  on_attach = overridedOnAttach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      gofumpt = true,
+    },
+  },
+}
+
+-- JSON LSP with schemas
+lspconfig.jsonls.setup {
+  on_attach = overridedOnAttach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    json = {
+      schemas = require("schemastore").json.schemas(),
+      validate = { enable = true },
+    },
+  },
+}
+
+-- YAML LSP with Kubernetes schemas
+lspconfig.yamlls.setup {
+  on_attach = overridedOnAttach,
+  on_init = nvlsp.on_init,
+  capabilities = nvlsp.capabilities,
+  settings = {
+    yaml = {
+      schemaStore = {
+        enable = true,
+        url = "https://www.schemastore.org/api/json/catalog.json",
+      },
+      schemas = require("schemastore").yaml.schemas(),
+      format = {
+        enable = true,
+      },
+      validate = true,
+    },
+  },
+}

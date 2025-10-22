@@ -75,3 +75,25 @@ map("n", "<leader>rp", spectre.open_file_search, { desc = "Toggle Visaal Spectre
 map({ "n", "t" }, "<leader>tt", function()
   require("nvchad.term").toggle { pos = "float", id = "floatTerm" }
 end, { desc = "Terminal Toggle Floating term" })
+
+-- DAP (Debugger)
+local dap_ok, dap = pcall(require, "dap")
+if dap_ok then
+  map("n", "<leader>db", dap.toggle_breakpoint, { desc = "DAP Toggle Breakpoint" })
+  map("n", "<leader>dB", function()
+    dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
+  end, { desc = "DAP Conditional Breakpoint" })
+  map("n", "<leader>dc", dap.continue, { desc = "DAP Continue" })
+  map("n", "<leader>di", dap.step_into, { desc = "DAP Step Into" })
+  map("n", "<leader>do", dap.step_over, { desc = "DAP Step Over" })
+  map("n", "<leader>dO", dap.step_out, { desc = "DAP Step Out" })
+  map("n", "<leader>dr", dap.repl.toggle, { desc = "DAP Toggle REPL" })
+  map("n", "<leader>dl", dap.run_last, { desc = "DAP Run Last" })
+  map("n", "<leader>dt", dap.terminate, { desc = "DAP Terminate" })
+
+  local dapui_ok, dapui = pcall(require, "dapui")
+  if dapui_ok then
+    map("n", "<leader>du", dapui.toggle, { desc = "DAP Toggle UI" })
+    map("n", "<leader>de", dapui.eval, { desc = "DAP Eval" })
+  end
+end
