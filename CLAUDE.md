@@ -57,15 +57,100 @@ lua/
 - `intelephense` - PHP (requires license key in `~/.intelephense`)
 
 ### LSP Keybindings (in lua/configs/lspconfig.lua)
-All LSP navigation uses FZF-lua:
+
+**Navigation** (FZF-lua integrated):
 - `ga` - LSP finder (all references/definitions/implementations)
 - `gi` - Implementations
 - `gr` - References
 - `gd` - Definitions
 - `gD` - Declarations
 - `gt` - Type definitions
-- `<leader>ca` - Code actions
-- `<leader>ds` - Document diagnostics
+
+**Documentation & Help**:
+- `K` - Hover documentation
+- `<C-k>` - Signature help (normal/insert mode)
+
+**Code Actions & Refactoring**:
+- `<leader>ca` - Code actions (FZF-lua)
+- `<leader>rn` - Rename symbol (LSPSaga)
+
+**Diagnostics**:
+- `<leader>ds` - Document diagnostics (FZF-lua)
+- `<leader>dw` - Workspace diagnostics (FZF-lua)
+- `[d` - Previous diagnostic
+- `]d` - Next diagnostic
+- `<leader>dl` - Show line diagnostics (float)
+
+**Call Hierarchy**:
+- `<leader>ic` - Incoming calls
+- `<leader>oc` - Outgoing calls
+
+**LSPSaga Features**:
+- `<leader>o` - Outline (symbol tree)
+- `gh` - LSPSaga finder (enhanced finder UI)
+- `gp` - Peek definition (preview without jumping)
+- `<leader>cd` - Line diagnostics (LSPSaga)
+- `<leader>cb` - Buffer diagnostics (LSPSaga)
+- `<leader>cw` - Workspace diagnostics (LSPSaga)
+- `<leader>ci` - Incoming calls (LSPSaga)
+- `<leader>co` - Outgoing calls (LSPSaga)
+
+**Inlay Hints**:
+- `<leader>th` - Toggle inlay hints (type hints inline)
+
+### LSP Advanced Features
+
+**Inlay Hints**: Automatically enabled for servers that support them (TypeScript, Go, Rust). Shows inline type hints, parameter names, and return types directly in your code.
+
+**Enhanced Diagnostics**:
+- Virtual text with bullet prefix (●)
+- Severity-based sorting
+- Floating windows with rounded borders
+- Source attribution when multiple sources present
+
+**FZF-lua LSP Integration**: All LSP search results are displayed through FZF-lua with:
+- Filename-first formatting for better readability
+- File and color icons for visual distinction
+- Symbol type icons (function, class, method, etc.)
+- Optimized preview windows with syntax highlighting
+- Split/vsplit/tab opening support
+- Flexible layout (horizontal/vertical based on terminal size)
+
+**LSPSaga Enhanced UI**:
+- Beautiful floating windows with rounded borders
+- Lightbulb indicator for available code actions
+- Outline sidebar for quick symbol navigation
+- Peek definition windows (preview without jumping)
+- Enhanced rename with project-wide preview
+- Call hierarchy visualization
+- Diagnostic jump list with line numbers
+
+### Server-Specific Configurations
+
+**TypeScript/JavaScript** (`ts_ls`):
+- Full inlay hints for parameters, types, and return values
+- Configured to show all type information inline
+
+**Python** (`pyright`):
+- Basic type checking mode
+- Automatic path discovery
+- Library code type inference
+- Workspace-wide diagnostics
+
+**Go** (`gopls`):
+- Static check enabled
+- gofumpt formatting
+- Unused parameter detection
+- Inlay hints for types, literals, and parameters
+
+**JSON** (`jsonls`):
+- Schema validation via schemastore
+- Auto-completion for common JSON schemas
+
+**YAML** (`yamlls`):
+- Kubernetes schema support
+- Schema store integration
+- Format on save enabled
 
 ## Code Formatting
 

@@ -24,63 +24,150 @@ end
 
 return {
   "ibhagwan/fzf-lua",
-  -- optional for icon support
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  -- or if using mini.icons/mini.nvim
-  -- dependencies = { "echasnovski/mini.icons" },
   opts = {
-    files = {
-      -- previewer = "bat",
-      formatter = "path.filename_first",
-      -- path_shorten = 5,
-      -- cwd_prompt = false,
-      -- cmd = "fd -p",
-      -- fd_opts = [[--color=never --hidden --type f --type l --exclude .git -p]],
+    -- Global settings
+    winopts = {
+      height = 0.85,
+      width = 0.90,
+      row = 0.35,
+      col = 0.50,
+      border = "rounded",
+      preview = {
+        layout = "flex",
+        flip_columns = 120,
+        horizontal = "right:50%",
+        vertical = "down:45%",
+        scrollbar = "float",
+        scrollchars = { "█", "" },
+      },
     },
-    lsp = {
-      -- previewer = "bat",
-      -- jump_to_single_result = true,
+    fzf_opts = {
+      ["--layout"] = "reverse",
+      ["--info"] = "inline",
+      ["--height"] = "100%",
+      ["--pointer"] = "▶",
+      ["--marker"] = "✓",
+    },
+    keymap = {
+      builtin = {
+        ["<C-/>"] = "toggle-help",
+        ["<C-d>"] = "preview-page-down",
+        ["<C-u>"] = "preview-page-up",
+      },
+      fzf = {
+        ["ctrl-q"] = "select-all+accept",
+      },
+    },
+    -- File settings
+    files = {
       formatter = "path.filename_first",
-      cwd_only = true,
+      git_icons = true,
+      file_icons = true,
+      color_icons = true,
+    },
+    -- LSP settings
+    lsp = {
+      formatter = "path.filename_first",
+      cwd_only = false,
+      file_icons = true,
+      color_icons = true,
+      git_icons = false,
+      symbols = {
+        symbol_icons = {
+          File = "󰈙",
+          Module = "",
+          Namespace = "󰌗",
+          Package = "",
+          Class = "󰌗",
+          Method = "󰆧",
+          Property = "",
+          Field = "",
+          Constructor = "",
+          Enum = "",
+          Interface = "",
+          Function = "󰊕",
+          Variable = "󰀫",
+          Constant = "󰏿",
+          String = "",
+          Number = "󰎠",
+          Boolean = "◩",
+          Array = "󰅪",
+          Object = "󰅩",
+          Key = "󰌋",
+          Null = "󰟢",
+          EnumMember = "",
+          Struct = "󰌗",
+          Event = "",
+          Operator = "󰆕",
+          TypeParameter = "󰊄",
+        },
+        symbol_fmt = function(s)
+          return "[" .. s .. "]"
+        end,
+      },
       finder = {
-        -- previewer = "bat",
         formatter = "path.filename_first",
         jump_to_single_result = true,
+        file_icons = true,
+        color_icons = true,
+      },
+      code_actions = {
+        previewer = "codeaction_native",
+        preview_pager = "delta --side-by-side --width=$FZF_PREVIEW_COLUMNS --hunk-header-style='omit'",
       },
     },
-    winopts = {
-      preview = {
-        horizontal = "right:45%",
+    -- Diagnostics settings
+    diagnostics = {
+      file_icons = true,
+      color_icons = true,
+      git_icons = false,
+      diag_icons = true,
+      icon_padding = " ",
+      multiline = true,
+      signs = {
+        ["Error"] = { text = "", texthl = "DiagnosticError" },
+        ["Warn"] = { text = "", texthl = "DiagnosticWarn" },
+        ["Info"] = { text = "", texthl = "DiagnosticInfo" },
+        ["Hint"] = { text = "", texthl = "DiagnosticHint" },
       },
+    },
+    -- Preview settings
+    preview = {
+      border = "border",
+      wrap = "nowrap",
+      hidden = "nohidden",
+      vertical = "down:45%",
+      horizontal = "right:50%",
+      layout = "flex",
+      flip_columns = 120,
+      title = true,
+      title_align = "center",
+      scrollbar = "float",
+      scrolloff = "-2",
+      scrollchars = { "█", "" },
+      delay = 100,
+      winopts = {
+        number = true,
+        relativenumber = false,
+        cursorline = true,
+        cursorlineopt = "both",
+        cursorcolumn = false,
+        signcolumn = "no",
+        list = false,
+        foldenable = false,
+        foldmethod = "manual",
+      },
+    },
+    -- Grep settings
+    grep = {
+      formatter = "path.filename_first",
+      git_icons = true,
+      file_icons = true,
+      color_icons = true,
     },
   },
   config = function(_, opts)
     require("fzf-lua").setup(opts)
-    -- require("fzf-lua").setup { "fzf-native" }
-    -- require("fzf-lua").setup {
-    --   "fzf-native",
-    --   files = {
-    --     -- previewer = "bat",
-    --     formatter = "path.filename_first",
-    --     -- path_shorten = 5,
-    --     -- cwd_prompt = false,
-    --   },
-    --   lsp = {
-    --     -- previewer = "bat",
-    --     jump_to_single_result = true,
-    --     formatter = "path.filename_first",
-    --     cwd_only = true,
-    --     finder = {
-    --       -- previewer = "bat",
-    --       formatter = "path.filename_first",
-    --       jump_to_single_result = true,
-    --     },
-    --   },
-    --   winopts = {
-    --     preview = {
-    --       horizontal = "right:45%",
-    --     },
-    --   },
-    -- }
   end,
 }

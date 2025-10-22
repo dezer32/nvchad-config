@@ -26,27 +26,47 @@ local overridedOnAttach = function(client, bufnr)
     end
   end
 
+  -- Enable inlay hints if supported
+  if client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+  end
+
   local s = vim.keymap.set
   local fzf = require "fzf-lua"
-  s("n", "ga", fzf.lsp_finder, { buffer = bufnr, noremap = true, silent = true, desc = "FZF finder" })
-  s("n", "gi", fzf.lsp_implementations, { buffer = bufnr, noremap = true, silent = true, desc = "FZF implementations" })
-  s("n", "gr", fzf.lsp_references, { buffer = bufnr, noremap = true, silent = true, desc = "FZF references" })
-  s("n", "gd", fzf.lsp_definitions, { buffer = bufnr, noremap = true, silent = true, desc = "FZF definitions" })
-  s("n", "gD", fzf.lsp_declarations, { buffer = bufnr, noremap = true, silent = true, desc = "FZF declarations" })
-  s("n", "gt", fzf.lsp_typedefs, { buffer = bufnr, noremap = true, silent = true, desc = "FZF declarations" })
 
-  s(
-    "n",
-    "<leader>ca",
-    fzf.lsp_code_actions,
-    { buffer = bufnr, noremap = true, silent = true, desc = "FZF code action" }
-  )
-  s(
-    "n",
-    "<leader>ds",
-    fzf.diagnostics_document,
-    { buffer = bufnr, noremap = true, silent = true, desc = "FZF code action" }
-  )
+  -- Navigation
+  s("n", "ga", fzf.lsp_finder, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Finder" })
+  s("n", "gi", fzf.lsp_implementations, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Implementations" })
+  s("n", "gr", fzf.lsp_references, { buffer = bufnr, noremap = true, silent = true, desc = "LSP References" })
+  s("n", "gd", fzf.lsp_definitions, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Definitions" })
+  s("n", "gD", fzf.lsp_declarations, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Declarations" })
+  s("n", "gt", fzf.lsp_typedefs, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Type Definitions" })
+
+  -- Documentation and help
+  s("n", "K", vim.lsp.buf.hover, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Hover" })
+  s("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
+  s("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
+
+  -- Code actions and refactoring
+  s("n", "<leader>ca", fzf.lsp_code_actions, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Code Actions" })
+
+  -- Diagnostics
+  s("n", "<leader>ds", fzf.diagnostics_document, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Document Diagnostics" })
+  s("n", "<leader>dw", fzf.diagnostics_workspace, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Workspace Diagnostics" })
+  s("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, noremap = true, silent = true, desc = "Previous Diagnostic" })
+  s("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, noremap = true, silent = true, desc = "Next Diagnostic" })
+  s("n", "<leader>dl", vim.diagnostic.open_float, { buffer = bufnr, noremap = true, silent = true, desc = "Show Line Diagnostics" })
+
+  -- Call hierarchy
+  s("n", "<leader>ic", fzf.lsp_incoming_calls, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Incoming Calls" })
+  s("n", "<leader>oc", fzf.lsp_outgoing_calls, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Outgoing Calls" })
+
+  -- Inlay hints toggle
+  if vim.lsp.inlay_hint then
+    s("n", "<leader>th", function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
+    end, { buffer = bufnr, noremap = true, silent = true, desc = "Toggle Inlay Hints" })
+  end
 end
 
 -- lsps with default config
@@ -58,6 +78,24 @@ for _, lsp in ipairs(servers) do
   })
   vim.lsp.enable(lsp)
 end
+
+-- Configure enhanced diagnostics
+vim.diagnostic.config {
+  virtual_text = {
+    prefix = "●",
+    source = "if_many",
+  },
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = {
+    source = "always",
+    border = "rounded",
+    header = "",
+    prefix = "",
+  },
+}
 
 vim.lsp.config("lua_ls", {
   on_attach = overridedOnAttach,
@@ -110,7 +148,9 @@ vim.lsp.config("intelephense", {
 })
 vim.lsp.enable("intelephense")
 
--- TypeScript/JavaScript LSP
+-- Enhanced configurations for specific servers with custom settings
+
+-- TypeScript/JavaScript with inlay hints
 vim.lsp.config("ts_ls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
@@ -142,7 +182,7 @@ vim.lsp.config("ts_ls", {
 })
 vim.lsp.enable("ts_ls")
 
--- Python LSP
+-- Python with type checking
 vim.lsp.config("pyright", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
@@ -160,7 +200,7 @@ vim.lsp.config("pyright", {
 })
 vim.lsp.enable("pyright")
 
--- Go LSP
+-- Go with static check and gofumpt
 vim.lsp.config("gopls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
@@ -172,12 +212,21 @@ vim.lsp.config("gopls", {
       },
       staticcheck = true,
       gofumpt = true,
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
     },
   },
 })
 vim.lsp.enable("gopls")
 
--- JSON LSP with schemas
+-- JSON with schemas
 vim.lsp.config("jsonls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
@@ -191,7 +240,7 @@ vim.lsp.config("jsonls", {
 })
 vim.lsp.enable("jsonls")
 
--- YAML LSP with Kubernetes schemas
+-- YAML with Kubernetes schemas
 vim.lsp.config("yamlls", {
   on_attach = overridedOnAttach,
   on_init = nvlsp.on_init,
