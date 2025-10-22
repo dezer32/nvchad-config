@@ -32,34 +32,34 @@ local overridedOnAttach = function(client, bufnr)
   end
 
   local s = vim.keymap.set
-  local fzf = require "fzf-lua"
 
-  -- Navigation
-  s("n", "ga", fzf.lsp_finder, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Finder" })
-  s("n", "gi", fzf.lsp_implementations, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Implementations" })
-  s("n", "gr", fzf.lsp_references, { buffer = bufnr, noremap = true, silent = true, desc = "LSP References" })
-  s("n", "gd", fzf.lsp_definitions, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Definitions" })
-  s("n", "gD", fzf.lsp_declarations, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Declarations" })
-  s("n", "gt", fzf.lsp_typedefs, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Type Definitions" })
+  -- Navigation with LSPSaga
+  s("n", "ga", "<cmd>Lspsaga finder<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Finder (All)" })
+  s("n", "gi", "<cmd>Lspsaga finder imp<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Implementations" })
+  s("n", "gr", "<cmd>Lspsaga finder ref<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga References" })
+  s("n", "gd", "<cmd>Lspsaga goto_definition<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Goto Definition" })
+  s("n", "gD", "<cmd>Lspsaga peek_definition<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Peek Definition" })
+  s("n", "gt", "<cmd>Lspsaga goto_type_definition<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Type Definition" })
 
-  -- Documentation and help
-  s("n", "K", vim.lsp.buf.hover, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Hover" })
+  -- Documentation and help with LSPSaga
+  s("n", "K", "<cmd>Lspsaga hover_doc<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Hover Doc" })
   s("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
   s("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
 
-  -- Code actions and refactoring
-  s("n", "<leader>ca", fzf.lsp_code_actions, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Code Actions" })
+  -- Code actions with LSPSaga
+  s("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Code Actions" })
+  s("v", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Code Actions" })
 
-  -- Diagnostics
-  s("n", "<leader>ds", fzf.diagnostics_document, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Document Diagnostics" })
-  s("n", "<leader>dw", fzf.diagnostics_workspace, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Workspace Diagnostics" })
-  s("n", "[d", vim.diagnostic.goto_prev, { buffer = bufnr, noremap = true, silent = true, desc = "Previous Diagnostic" })
-  s("n", "]d", vim.diagnostic.goto_next, { buffer = bufnr, noremap = true, silent = true, desc = "Next Diagnostic" })
-  s("n", "<leader>dl", vim.diagnostic.open_float, { buffer = bufnr, noremap = true, silent = true, desc = "Show Line Diagnostics" })
+  -- Diagnostics with LSPSaga
+  s("n", "<leader>ds", "<cmd>Lspsaga show_buf_diagnostics<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Buffer Diagnostics" })
+  s("n", "<leader>dw", "<cmd>Lspsaga show_workspace_diagnostics<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Workspace Diagnostics" })
+  s("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Previous Diagnostic" })
+  s("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Next Diagnostic" })
+  s("n", "<leader>dl", "<cmd>Lspsaga show_line_diagnostics<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Line Diagnostics" })
 
-  -- Call hierarchy
-  s("n", "<leader>ic", fzf.lsp_incoming_calls, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Incoming Calls" })
-  s("n", "<leader>oc", fzf.lsp_outgoing_calls, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Outgoing Calls" })
+  -- Call hierarchy with LSPSaga
+  s("n", "<leader>ic", "<cmd>Lspsaga incoming_calls<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Incoming Calls" })
+  s("n", "<leader>oc", "<cmd>Lspsaga outgoing_calls<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Outgoing Calls" })
 
   -- Inlay hints toggle
   if vim.lsp.inlay_hint then
