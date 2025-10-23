@@ -43,8 +43,12 @@ local overridedOnAttach = function(client, bufnr)
 
   -- Documentation and help with LSPSaga
   s("n", "K", "<cmd>Lspsaga hover_doc<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Hover Doc" })
-  s("n", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
-  s("i", "<C-k>", vim.lsp.buf.signature_help, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
+  s("n", "<C-k>", function()
+    vim.lsp.buf.signature_help { focusable = false, border = "rounded" }
+  end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
+  s("i", "<C-k>", function()
+    vim.lsp.buf.signature_help { focusable = false, border = "rounded" }
+  end, { buffer = bufnr, noremap = true, silent = true, desc = "LSP Signature Help" })
 
   -- Code actions with LSPSaga
   s("n", "<leader>ca", "<cmd>Lspsaga code_action<CR>", { buffer = bufnr, noremap = true, silent = true, desc = "LSPSaga Code Actions" })
